@@ -1,0 +1,94 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: url('./img1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+.form {
+    width: 280px;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.form h2 {
+    text-align: center;
+    color: #ff7200;
+    font-size: 22px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px auto 20px;
+    padding: 8px;
+    width: 220px;
+}
+
+.form input {
+    width: 100%;
+    height: 35px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ff7200;
+    color: white;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.form input:focus {
+    outline: none;
+}
+
+::placeholder {
+    color: white;
+}
+
+.btnn {
+    width: 100%;
+    height: 35px;
+    background-color: #ff7200;
+    border: none;
+    margin-top: 25px;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.btnn:hover {
+    background-color: white;
+    color: #ff7200;
+}
+
+.liw {
+    padding-top: 15px;
+    color: white;
+    text-align: center;
+}
+
+.icons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.icons a {
+    text-decoration: none;
+    color: white;
+    margin: 0 8px;
+}
+
+.icons ion-icon {
+    font-size: 26px;
+    transition: 0.3s;
+}
+
+.icons ion-icon:hover {
+    color: #ff7200;
+}
