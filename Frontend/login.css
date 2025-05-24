@@ -1,4 +1,4 @@
-/* signup.css */
+/* login.css */
 /* Reset some basics */
 * {
   box-sizing: border-box;
@@ -6,6 +6,7 @@
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   scroll-behavior: smooth;
+  /* Removed global background-color and color from here as body handles it */
 }
 
 body {
@@ -17,7 +18,7 @@ body {
   color: #333; /* Default text color */
 }
 
-.signup-container {
+.login-container {
   background-color: #e6f0ff;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -65,7 +66,6 @@ body {
   color: #0a3d62;
 }
 
-.form-section input[type="text"],
 .form-section input[type="email"],
 .form-section input[type="password"] {
   width: 100%;
@@ -77,15 +77,10 @@ body {
   transition: border-color 0.3s ease;
 }
 
-.form-section input[type="text"]:focus,
 .form-section input[type="email"]:focus,
 .form-section input[type="password"]:focus {
   border-color: #0a3d62;
   outline: none;
-}
-
-.form-section input[type="checkbox"] {
-  margin-right: 8px;
 }
 
 .form-section button {
@@ -117,16 +112,16 @@ body {
 .image-section img {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 10px; /* Added for softer image edges */
 }
 
 @media (max-width: 768px) {
-  .signup-container {
+  .login-container {
     flex-direction: column;
     margin: 20px;
   }
 
   .image-section {
-    display: none;
+    display: none; /* Hide image on smaller screens */
   }
 }

@@ -1,134 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disaster</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReliefLink - Disaster Management Platform</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 <body>
-    <div class="main">
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">Sahayak</h2>
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Service</a></li>
-                    <li><a href="./design.html">Design</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="search">
-                <input class="srch" type="search" name="" placeholder="Type To text">
-                <a href="#"><button class="btn">Search </button></a>
-            </div>
-
-            <div class="content">
-                <h1>One platform for all your <span>disaster needs</span></h1>
-                <p class="par">Whether it’s floods, earthquakes,or fires — we help you stay prepared,<br> find help quickly, and support others in need
-                We bridge the gap between <br>those who see the crisis and those who can respond <br>— ensuring that help arrives faster, where it’s needed most.</p>
-
-                <button class="cn">JOIN US</button>
-                <div class="form"><h2>Login</h2>
-                <input type="email" name="email" placeholder="Enter email here">
-                <input type="text" name="disaster" placeholder="Enter type of disaster here">
-                <input type="tel" name="phonenumber" placeholder="Enter phone number here">
-                <button class="btn"><a href="#">LOGIN</a></button>
-
-                <p class="link">Don't have an account
-                <a href="./signup.html">Signup</a> here</p>
-                <p class="liw">Log in with</p>
-
-                <div class="icons">
-                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-
-                </div>
-                </div>
-            </div>
-        </div>
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="logo">ReliefLink</div>
+      <nav>
+        <ul>
+          <li><a href="#home-section" id="home-link">Home</a></li>
+          <li><a href="#map-section" id="live-map-link">Live Map</a></li>
+          <li><a href="#donate-section" id="donate-link">Donate</a></li>
+          <li class="report-li" style="display: none;"><a href="#" id="report-link">Report</a></li>
+          <li class="login-li"><a href="./login.html">Login</a></li>
+          <li class="signup-li"><a href="./signup.html">Sign Up</a></li>
+          <li class="logout-li" style="display: none;"><a href="#" id="logout-link">Logout</a></li>
+        </ul>
+      </nav>
     </div>
-    <section id="about" class="about-section">
-        <div class="container">
-            <h2 class="section-title">🌐 About Our Disaster Management Platform</h2>
-            <p class="about-text">
-                Disasters — whether natural like floods, earthquakes, landslides, or man-made like fires and industrial accidents — strike with little warning, leaving behind chaos, fear, and a desperate need for timely help. One of the most critical gaps during such situations is the lack of an organized system for people to report what they witness and ensure that help reaches the right place at the right time.
-                <br><br>
-                We are developing a community-driven disaster reporting platform that empowers anyone — a citizen, a traveler, a witness — to report disasters in real-time. Once logged in, users can fill out a simple report form providing the type of disaster, a description of the situation, and the location (which can be automatically detected or entered manually). Our system processes the data and sends alert messages to NGOs and emergency teams.
-                <br><br>
-                In future versions, we aim to include features like:
-                <ul class="features-list">
-                    <li>✅ Live disaster map with verified reports</li>
-                    <li>📊 Analytics dashboards for response teams</li>
-                    <li>🕵️‍♀️ Anonymous reporting</li>
-                </ul>
-            </p>
-        </div>
-    </section>
+  </header>
 
-    <section id="services" class="about-section">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p class="about-text">
-                🌐 Our Services – Connecting Help Where It’s Needed Most
-            At Sahayak, our goal is to streamline disaster response through the power of community reporting and technology. 
-            Our platform allows individuals who witness or are informed of a disaster — whether natural like floods and earthquakes or man-made like fires or accidents — to quickly report the incident. Once a user logs in, they can fill out a simple form providing details such as the type of disaster, a brief description, and the location. This information is then automatically shared via email and SMS with nearby NGOs, service centers, and relevant disaster response teams, ensuring that accurate data reaches the right people in real time.
-
-            This system bridges the communication gap between citizens on the ground and organizations that can act fast. 
-            It improves response time, helps coordinate rescue operations, and ensures that no report goes unnoticed. The platform supports both automatic location detection and manual input, making it usable even in areas with limited connectivity or infrastructure.
-
-            We’ve built this with a strong focus on accessibility, allowing users from rural and urban areas alike to access the platform 
-            from mobile phones or desktops. In the future, we plan to introduce features such as a live map of reported disaster zones, dashboards for emergency services, and anonymous reporting for sensitive situations.
-
-            With Sahayak, we aim to create a connected and informed network that enables faster action, better coordination, and ultimately,
-            saves lives when every second counts.
-            </p>
-        </div>
-    </section>
-    
-    <footer id="contact" class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <h2>Sahayak</h2>
-                <p>Connecting help where it’s needed most.</p>
-            </div>
-            <div class="footer-contact">
-                <h3>Contact Us</h3>
-                <ul>
-                    <li>📞 Tel: 8121297649</li>
-                    <li>🚨 Emergency: 100</li>
-                    <li>✉️ Email: support@sahayak.org</li>
-                </ul>
-            </div>
-            <div class="footer-social">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+  <main>
+    <section id="home-section" class="home-section main-content-section">
+        <div class="hero">
+            <div class="carousel">
+                <div class="slide fade">
+                    <img src="./images/carousel1.jpg" alt="Relief effort 1">
+                    <div class="carousel-caption">
+                        <h3>Connecting Aid, Saving Lives</h3>
+                        <p>Your fastest link to disaster relief. Report incidents, get help.</p>
+                    </div>
+                </div>
+                <div class="slide fade">
+                    <img src="./images/carousel2.jpg" alt="Relief effort 2">
+                    <div class="carousel-caption">
+                        <h3>Rapid Response, Real Impact</h3>
+                        <p>Bridging the gap between victims and rescue teams.</p>
+                    </div>
+                </div>
+                <div class="slide fade">
+                    <img src="./images/carousel3.jpg" alt="Relief effort 3">
+                    <div class="carousel-caption">
+                        <h3>Empowering Communities in Crisis</h3>
+                        <p>Your report triggers immediate, location-based assistance.</p>
+                    </div>
+                </div>
+                <div style="text-align:center; position: absolute; bottom: 10px; width: 100%;">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
             </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-        <div class="footer-bottom">
-            <p>© 2025 Sahayak. All rights reserved.</p>
+        <div class="home-content-blocks">
+            <div class="content-block">
+                <h3>Report Disasters Instantly</h3>
+                <p>Use our intuitive map interface to pinpoint incident locations.</p>
+            </div>
+            <div class="content-block">
+                <h3>Connect with NGOs</h3>
+                <p>Automated alerts reach the nearest rescue and aid organizations.</p>
+            </div>
+            <div class="content-block">
+                <h3>Stay Updated</h3>
+                <p>Track the status of reported incidents and relief efforts.</p>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <section id="map-section" class="map-section main-content-section" style="display: none;">
+      <h2>Live Disaster Map</h2>
+      <div id="mapid" style="height: 600px; width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+    </section>
 
-</body>
+    <section id="donate-section" class="donate-section main-content-section" style="display: none;">
+      <h2>Donate to Relief Efforts</h2>
+      <p>Your contribution can make a significant difference in disaster-affected areas. Support the work of various NGOs and rescue teams by donating today.</p>
+      <div class="donation-options">
+        <div class="option-box">
+          <h3>Direct Bank Transfer</h3>
+          <p>Account Name: ReliefLink Foundation</p>
+          <p>Account Number: XXXXXXXXXXXX</p>
+          <p>IFSC Code: YYYYYYYYYY</p>
+          <p>Bank: ZZZZ Bank</p>
+        </div>
+        <div class="option-box">
+          <h3>Online Payment</h3>
+          <p>Donate securely via our integrated payment gateway.</p>
+          <button class="donate-btn">Donate Now</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="report-disaster" class="report-disaster-section main-content-section" style="display: none;">
+        <h2>Report a Disaster</h2>
+        <div class="form-container">
+            <p class="text-gray-600 mb-4">
+                Use the form below to report a disaster. Click on the map to mark the exact location.
+            </p>
+            <form id="disaster-report-form">
+                <div class="form-group">
+                    <label for="disasterType">Disaster Type:</label>
+                    <select id="disasterType" required>
+                        <option value="">Select Type</option>
+                        <option value="Flood">Flood</option>
+                        <option value="Earthquake">Earthquake</option>
+                        <option value="Cyclone">Cyclone</option>
+                        <option value="Landslide">Landslide</option>
+                        <option value="Fire">Fire</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" rows="5" placeholder="Provide a detailed description of the disaster (e.g., severity, immediate needs, number of affected people)." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUpload">Upload Image (Optional):</label>
+                    <input type="file" id="imageUpload" accept="image/*">
+                    <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 200px; margin-top: 10px; border-radius: 8px;">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactInfo">Contact Information:</label>
+                    <input type="text" id="contactInfo" placeholder="Your Name, Phone, or Email (Optional)">
+                </div>
+
+                <div class="form-group">
+                    <label>Mark Location on Map:</label>
+                    <div id="report-mapid" style="height: 400px; width: 100%; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"></div>
+                    <p class="mt-2 text-sm text-gray-500" id="selected-location-text">
+                        Click on the map to select the disaster location.
+                    </p>
+                    <input type="hidden" id="latitude" required>
+                    <input type="hidden" id="longitude" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Report</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="testimonials-section" class="testimonials main-content-section">
+      <h2>What People Say</h2>
+      <div class="testimonial-box">
+        <p>"Thanks to ReliefLink, our village received food within 24 hours of the flood."</p>
+        <strong>- Asha, Volunteer</strong>
+      </div>
+      <div class="testimonial-box">
+        <p>"The platform helped our NGO reach people faster than ever before."</p>
+        <strong>- Arvind, NGO Head</strong>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 ReliefLink. All rights reserved.</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script> <script src="./js/firebase-init.js"></script>
+  <script src="./js/map.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/carousel.js"></script>
+  <script src="./js/report.js"></script> </body>
 </html>
-
-
-
-
-
