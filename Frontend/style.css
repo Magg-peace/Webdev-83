@@ -158,9 +158,9 @@ nav a:hover {
 
 /* Main Content Sections */
 main {
-    max-width: 1200px; /* Max width for main content */
-    margin: 0 auto; /* Center main content */
-    padding: 0 1rem; /* Padding on sides */
+  max-width: 1200px; /* Max width for main content */
+  margin: 0 auto; /* Center main content */
+  padding: 0 1rem; /* Padding on sides */
 }
 
 section {
@@ -172,12 +172,60 @@ section {
 }
 
 section h2 {
-    font-size: 2.5rem; /* Consistent heading size */
-    color: #0a3d62;
-    text-align: center;
-    margin-bottom: 2.5rem; /* More space below headings */
-    font-weight: 700;
+  font-size: 2.5rem; /* Consistent heading size */
+  color: #0a3d62;
+  text-align: center;
+  margin-bottom: 2.5rem; /* More space below headings */
+  font-weight: 700;
 }
+
+/* New: Impact Statistics Section */
+.stats-section {
+  background-color: #e6f0ff; /* Light blue background for impact stats */
+  text-align: center;
+  padding: 4rem 2rem; /* More padding for a prominent section */
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 2rem; /* Space between stat boxes */
+  margin-top: 2rem;
+}
+
+.stat-box {
+  background-color: white;
+  border-radius: 15px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  flex: 1; /* Allow boxes to grow/shrink */
+  min-width: 250px; /* Minimum width before wrapping */
+  max-width: 300px; /* Max width for consistency */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.stat-number {
+  font-size: 3.5rem; /* Large, prominent numbers */
+  font-weight: bold;
+  color: #054A91; /* Main brand color */
+  display: block; /* Ensure it takes full width */
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 1.2rem;
+  color: #555;
+  font-weight: 500;
+}
+/* End New: Impact Statistics Section */
+
 
 /* Map Section */
 #map-section {
@@ -210,277 +258,229 @@ section h2 {
   background: #f0f8ff;
   border-radius: 18px; /* More rounded */
   padding: 2rem;
-  width: 300px; /* Wider boxes */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  text-align: center;
+  width: 30%; /* Adjust width for 3 columns */
+  min-width: 280px; /* Minimum width before stacking */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .option-box:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
 .option-box h3 {
-  color: #054A91;
-  font-size: 1.8rem;
+  color: #0a3d62;
   margin-bottom: 1rem;
+  font-size: 1.8rem;
 }
 
 .option-box p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+  color: #666;
+  margin-bottom: 1.5rem;
 }
 
-.option-box .button {
-  margin-top: 1rem;
-  padding: 0.8rem 1.8rem;
-  border-radius: 25px;
+.option-box .button.small {
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  border-radius: 20px;
 }
 
-/* Report Disaster Section */
-#report-disaster { /* Using the ID you provided */
-    background: #e6f0ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3rem 2rem; /* Consistent padding */
+/* Report Section (display:none by default, controlled by JS) */
+#report-section {
+    background: #fff;
+    text-align: center;
 }
 
 .report-container {
-    background-color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    padding: 40px;
-    width: 100%;
-    max-width: 700px; /* Max width for the form */
-    margin: auto; /* Center the container */
-}
-
-.report-container h2 {
-    font-size: 28px;
-    color: #0a3d62;
-    margin-bottom: 2rem;
-    text-align: center;
-    font-weight: 700;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: left; /* Align form elements to the left */
 }
 
 .form-group {
-    margin-bottom: 1.5rem; /* Space between form groups */
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
     font-weight: 600;
     color: #0a3d62;
-    font-size: 1.05rem;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="file"],
-.form-group textarea,
-.form-group select {
+.form-group select,
+.form-group textarea {
     width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1.8px solid #aacde8; /* Slightly thicker, light blue border */
-    border-radius: 8px; /* Rounded corners for inputs */
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: #f8faff; /* Very light blue background for inputs */
-}
-
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus,
-.form-group input[type="file"]:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    border-color: #054A91; /* Darker blue border on focus */
-    box-shadow: 0 0 0 3px rgba(5, 74, 145, 0.2); /* Focus ring effect */
-    outline: none; /* Remove default outline */
+    box-sizing: border-box; /* Ensures padding doesn't affect total width */
 }
 
 .form-group textarea {
-    resize: vertical; /* Allow vertical resizing for textareas */
+    resize: vertical; /* Allow vertical resizing */
 }
 
-.form-group #image-preview {
-    border: 1px solid #ddd;
+#report-map {
     border-radius: 8px;
-    padding: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-top: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.submit-btn {
-    width: 100%;
-    padding: 0.9rem 1.5rem;
+#selected-coords {
+    font-weight: bold;
+    color: #054A91;
+}
+
+.report-container .button {
+    width: auto; /* Adjust button width */
+    padding: 0.8rem 2.5rem;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
     background-color: #054A91;
     color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.15rem;
-    cursor: pointer;
-    margin-top: 1.5rem; /* Space above button */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.submit-btn:hover {
+.report-container .button:hover {
     background-color: #003f7f;
     transform: translateY(-2px);
 }
 
-.submit-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.message-box {
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    display: none; /* Hidden by default */
+}
+
+.message-box.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message-box.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 
 
 /* Partners */
 .partners {
-  padding: 3rem 2rem;
-  background: #f9f9f9;
+  background: #f9f9f9; /* Lighter background for partners */
   text-align: center;
-  margin-bottom: 2rem; /* Consistent margin */
+  padding: 3rem 2rem;
 }
 
 .partner-logos {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 3rem; /* More space between logos */
-    margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem; /* More space between logos */
+  margin-top: 2rem;
 }
 
 .partner-logos img {
   max-width: 150px; /* Larger logos */
   height: auto;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  filter: grayscale(80%); /* Subtle grayscale */
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .partner-logos img:hover {
-    opacity: 1;
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
 /* Testimonials */
 .testimonials {
-  padding: 3rem 2rem;
-  background: #e6f0ff;
+  padding: 4rem 2rem; /* More padding */
+  background: #e6f0ff; /* Light blue background */
   text-align: center;
-  margin-bottom: 2rem; /* Consistent margin */
-}
-
-.testimonials h2 {
-    margin-bottom: 2.5rem;
-    color: #0a3d62;
-    font-size: 2.5rem;
+  margin-bottom: 2rem; /* Space before footer */
 }
 
 .testimonial-box {
-  margin-bottom: 2rem; /* More space between testimonials */
-  font-style: italic;
-  background-color: #fff;
-  padding: 2rem;
+  background: white;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  max-width: 700px; /* Wider boxes */
-  margin-left: auto;
-  margin-right: auto;
+  padding: 2.5rem; /* More padding */
+  margin: 0 auto 2.5rem auto; /* Center and space out boxes */
+  max-width: 800px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  font-style: italic;
+  line-height: 1.8;
+  color: #444;
 }
 
 .testimonial-box p {
-    margin-bottom: 1rem;
-    line-height: 1.8; /* Increased line height for readability */
-    font-size: 1.1rem;
+  font-size: 1.25rem; /* Larger testimonial text */
+  margin-bottom: 1.5rem;
 }
 
 .testimonial-box strong {
-    color: #054A91;
-    font-size: 1.05rem;
+  display: block;
+  font-size: 1rem;
+  color: #0a3d62;
+  margin-top: 1rem;
 }
 
 /* Footer */
 footer {
   background: #054A91;
   color: white;
-  padding: 2rem; /* More padding */
+  padding: 1.5rem 2rem; /* More padding */
   text-align: center;
 }
 
 .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .socials {
-    margin-top: 0.8rem;
-}
-
-.socials a {
-    color: white;
-    text-decoration: none;
+  margin-top: 0.5rem; /* Space between text and icons on wrap */
 }
 
 .socials i {
-  margin: 0 0.8rem;
-  cursor: pointer;
-  font-size: 1.6rem; /* Larger icons */
-  transition: color 0.3s ease;
+  font-size: 1.5rem;
+  margin: 0 0.75rem; /* More space between icons */
+  color: white;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .socials i:hover {
-    color: #aacde8; /* Lighter blue on hover */
+  color: #aacde8;
+  transform: translateY(-2px);
 }
 
-/* Message Box Styles (for displayMessage function) */
-.message-box {
-    padding: 15px 20px;
-    margin: 15px auto;
-    border-radius: 8px;
-    font-weight: 600;
-    text-align: center;
-    max-width: 600px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    animation: fadeIn 0.5s ease-out;
-    z-index: 1001; /* Ensure it's above other content */
-    position: relative; /* Allows z-index to work */
-}
-
-.message-box.success {
-    background-color: #d4edda; /* Light green */
-    color: #155724; /* Dark green text */
-    border: 1px solid #c3e6cb;
-}
-
-.message-box.error {
-    background-color: #f8d7da; /* Light red */
-    color: #721c24; /* Dark red text */
-    border: 1px solid #f5c6cb;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
 
 /* Responsive Adjustments */
-@media (max-width: 1024px) {
-    .hero-content h1 {
-        font-size: 3rem;
-    }
-    .hero-content p {
-        font-size: 1.2rem;
-    }
-    section h2 {
-        font-size: 2.2rem;
-    }
-}
-
 @media (max-width: 768px) {
   .navbar-container {
     flex-direction: column;
@@ -524,6 +524,16 @@ footer {
       margin-bottom: 2rem;
   }
 
+  .stats-grid {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .stat-box {
+      width: 90%; /* Adjust width for mobile */
+      max-width: 350px;
+  }
+
   .donate-options, .partner-logos {
     flex-direction: column;
     align-items: center;
@@ -536,28 +546,11 @@ footer {
   }
 
   .report-container {
-      padding: 25px;
-      margin: 1rem; /* Add margin for smaller screens */
+      padding: 1.5rem;
   }
 
-  .form-group label, .form-group input, .form-group textarea, .form-group select, .submit-btn {
-      font-size: 0.95rem; /* Slightly smaller text for mobile forms */
-  }
-
-  .testimonial-box {
-      padding: 1.2rem;
-      margin-bottom: 1.5rem;
-  }
-
-  .testimonial-box p {
-      font-size: 1rem;
-  }
-
-  .socials i {
-      font-size: 1.3rem;
-      margin: 0 0.6rem;
+  .footer-content {
+      flex-direction: column;
+      gap: 1rem;
   }
 }
-
-/* Styles for login.css and signup.css are separate but follow similar principles */
-/* (Not included in this file as per your project structure, but keep them consistent) */

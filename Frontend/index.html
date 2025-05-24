@@ -58,88 +58,131 @@
       <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </section>
 
-    <section id="map-section">
-      <h2>Live Disaster Map</h2>
+    <section id="impact-stats" class="stats-section">
+        <h2>Our Impact</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-number">1,200+</span>
+                <p class="stat-label">Disasters Reported</p>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">50,000+</span>
+                <p class="stat-label">People Reached</p>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">150+</span>
+                <p class="stat-label">Active NGOs</p>
+            </div>
+        </div>
+    </section>
+    <section id="map-section" class="main-content-section"> <h2>Live Disaster Map</h2>
       <div id="mapid" style="height: 500px;"></div>
     </section>
 
-    <section id="donate-section">
-      <h2>Donate to Relief Efforts</h2>
+    <section id="donate-section" style="display:none;" class="main-content-section">
+      <h2>Support Relief Efforts</h2>
+      <p>Your contribution can make a significant difference in saving lives and rebuilding communities.</p>
       <div class="donate-options">
         <div class="option-box">
           <h3>Emergency Fund</h3>
-          <p>Support immediate relief for affected families.</p>
-          <button class="button">Donate to Fund</button>
+          <p>Provide immediate relief to affected families.</p>
+          <a href="#" class="button small">Donate Now</a>
         </div>
         <div class="option-box">
-          <h3>Volunteer</h3>
-          <p>Offer your time and skills to help on the ground.</p>
-          <button class="button secondary">Become a Volunteer</button>
+          <h3>Rehabilitation Projects</h3>
+          <p>Support long-term recovery and rebuilding efforts.</p>
+          <a href="#" class="button small">Donate Now</a>
+        </div>
+        <div class="option-box">
+          <h3>Volunteer Support</h3>
+          <p>Help us equip and train our dedicated volunteers.</p>
+          <a href="#" class="button small">Donate Now</a>
         </div>
       </div>
     </section>
 
-    <section id="report-section" class="main-content-section" style="display: none;">
+    <section id="report-section" style="display:none;" class="main-content-section">
       <h2>Report a Disaster</h2>
-      <form id="disaster-report-form">
-        <label for="disaster-type">Disaster Type:</label>
-        <select id="disaster-type" required>
-          <option value="">Select Type</option>
-          <option value="Flood">Flood</option>
-          <option value="Earthquake">Earthquake</option>
-          <option value="Cyclone">Cyclone</option>
-          <option value="Wildfire">Wildfire</option>
-          <option value="Landslide">Landslide</option>
-          <option value="Other">Other</option>
-        </select>
+      <p>Please provide details about the disaster you are reporting. This information helps us coordinate relief efforts effectively.</p>
+      <div class="report-container">
+        <form id="disaster-report-form">
+          <div class="form-group">
+            <label for="disaster-type">Disaster Type:</label>
+            <select id="disaster-type" name="disaster-type" required>
+              <option value="">Select Type</option>
+              <option value="Flood">Flood</option>
+              <option value="Earthquake">Earthquake</option>
+              <option value="Wildfire">Wildfire</option>
+              <option value="Cyclone">Cyclone</option>
+              <option value="Landslide">Landslide</option>
+              <option value="Drought">Drought</option>
+              <option value="Tsunami">Tsunami</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
 
-        <label for="location-description">Location Description:</label>
-        <input type="text" id="location-description" placeholder="e.g., Near ABC street, XYZ district" required>
+          <div class="form-group">
+            <label for="location-description">Location Description:</label>
+            <input type="text" id="location-description" placeholder="e.g., Street name, Landmark, Village name" required>
+          </div>
 
-        <label for="report-map">Click on Map to Select Location:</label>
-        <div id="report-map" style="height: 300px; width: 100%;"></div>
-        <p>Selected Coordinates: <span id="selected-coords">N/A</span></p>
-        <input type="hidden" id="latitude" required>
-        <input type="hidden" id="longitude" required>
+          <div class="form-group">
+            <label for="report-map">Click on the map to pinpoint location:</label>
+            <div id="report-map" style="height: 300px; width: 100%;"></div>
+            <p>Selected Coordinates: <span id="selected-coords">N/A</span></p>
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+          </div>
 
-        <label for="urgency-level">Urgency Level:</label>
-        <select id="urgency-level" required>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="Critical">Critical</option>
-        </select>
+          <div class="form-group">
+            <label for="severity">Severity:</label>
+            <select id="severity" name="severity" required>
+              <option value="">Select Severity</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
 
-        <label for="needs">Immediate Needs (e.g., Food, Water, Shelter, Medical):</label>
-        <textarea id="needs" rows="3" placeholder="Specify immediate needs"></textarea>
+          <div class="form-group">
+            <label for="needs">Immediate Needs:</label>
+            <textarea id="needs" name="needs" rows="4" placeholder="e.g., Food, Water, Medical Supplies, Shelter, Rescue" required></textarea>
+          </div>
 
-        <label for="reporter-name">Your Name (Optional):</label>
-        <input type="text" id="reporter-name" placeholder="Enter your name">
+          <div class="form-group">
+            <label for="reporter-contact">Your Contact (Optional):</label>
+            <input type="text" id="reporter-contact" placeholder="Phone or Email">
+          </div>
 
-        <label for="reporter-contact">Your Contact (Optional):</label>
-        <input type="text" id="reporter-contact" placeholder="Email or Phone">
+          <div class="form-group">
+            <label for="disaster-image">Upload Image (Optional):</label>
+            <input type="file" id="disaster-image" accept="image/*">
+            <img id="image-preview" src="#" alt="Image Preview" style="display:none; max-width: 200px; margin-top: 10px;">
+          </div>
 
-        <label for="disaster-image">Upload Image (Optional):</label>
-        <input type="file" id="disaster-image" accept="image/*">
-        <img id="image-preview" src="#" alt="Image Preview" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;">
-
-
-        <button type="submit" class="button">Submit Report</button>
-        <p id="report-message" style="margin-top: 10px; color: green;"></p>
-      </form>
+          <button type="submit" class="button">Submit Report</button>
+        </form>
+        <div id="message-box" class="message-box" style="display:none;"></div>
+      </div>
     </section>
 
     <section class="partners">
-      <h2>Our Partners</h2>
+      <h2>Our Valued Partners</h2>
       <div class="partner-logos">
-        <img src="./images/ngo1.png" alt="NGO 1">
-        <img src="./images/ngo2.png" alt="NGO 2">
-        <img src="./images/ngo3.png" alt="NGO 3">
+        <img src="./images/ngo1.png" alt="Partner 1">
+        <img src="./images/ngo2.png" alt="Partner 2">
+        <img src="./images/ngo3.png" alt="Partner 3">
+        <img src="./images/Construction.png" alt="Partner 4">
       </div>
     </section>
 
     <section class="testimonials">
-      <h2>What People Say</h2>
+      <h2>What People Say About Us</h2>
+      <div class="testimonial-box">
+        <p>"ReliefLink is a lifesaver. The real-time updates helped my family evacuate safely."</p>
+        <strong>- Priya, Resident</strong>
+      </div>
       <div class="testimonial-box">
         <p>"Thanks to ReliefLink, our village received food within 24 hours of the flood."</p>
         <strong>- Asha, Volunteer</strong>
@@ -170,10 +213,11 @@
    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
+
   <script src="./js/firebase-init.js"></script>
   <script src="./js/auth.js"></script>
-  <script src="./js/carousel.js"></script>
   <script src="./js/map.js"></script>
   <script src="./js/report.js"></script>
+  <script src="./js/carousel.js"></script>
 </body>
 </html>
