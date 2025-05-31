@@ -16,6 +16,7 @@ let selectedLng = null;
 const messageBox = document.getElementById('message-box');
 function displayMessage(message, isError = false) {
     if (messageBox) {
+
         messageBox.textContent = message;
         messageBox.className = 'message-box ' + (isError ? 'error' : 'success');
         messageBox.style.display = 'block';

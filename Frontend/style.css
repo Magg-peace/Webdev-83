@@ -8,9 +8,9 @@
 /* Fonts and Base Styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5; /* Light background for the main body */
+  background-color: #f0f2f5; /* Softer light background */
   color: #333; /* Default text color */
-  line-height: 1.6; /* Improved readability */
+  line-height: 1.7; /* Improved readability */
   scroll-behavior: smooth; /* Smooth scrolling for anchor links */
 }
 
@@ -64,7 +64,12 @@ nav a:hover {
   width: 100%;
   height: 500px; /* Increased height for impact */
   overflow: hidden;
-  margin-bottom: 2rem; /* Space below carousel */
+  border: none; /* Explicitly remove any border */
+  border-radius: 0; /* Remove rounded corners inherited from section */
+  box-shadow: none; /* Remove any shadow inherited from section */
+  padding: 0; /* Remove padding inherited from section */
+  background-color: transparent; /* Ensure no background color for the section itself */
+  margin-bottom: 0; /* Remove space below carousel if not desired, previously 2rem */
 }
 
 .slide {
@@ -92,6 +97,7 @@ nav a:hover {
   border-radius: 50%; /* Circular buttons */
   user-select: none; /* Prevent text selection */
   transition: background-color 0.3s ease;
+  display: none; /* Hide the arrows */
 }
 
 .prev { left: 15px; }
@@ -158,69 +164,190 @@ nav a:hover {
 
 /* Main Content Sections */
 main {
-  max-width: 1200px; /* Max width for main content */
-  margin: 0 auto; /* Center main content */
-  padding: 0 1rem; /* Padding on sides */
+  max-width: none; /* Allow carousel to span full width */
+  margin: 0; /* Remove auto margin */
+  padding: 0; /* Remove all padding for full width carousel */
 }
 
 section {
-  padding: 3rem 2rem; /* More vertical padding for sections */
-  margin-bottom: 2rem; /* Space between sections */
+  padding: 3.5rem 2rem; /* More vertical padding for sections */
+  margin-bottom: 2.5rem; /* More space between sections */
   background-color: white; /* Default background for content sections */
-  border-radius: 15px; /* Rounded corners for sections */
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08); /* Subtle shadow */
+  border-radius: 18px; /* Slightly more rounded corners for sections */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* More pronounced shadow */
 }
 
 section h2 {
-  font-size: 2.5rem; /* Consistent heading size */
-  color: #0a3d62;
+  font-size: 2.8rem; /* Consistent heading size */
+  color: #0a3d62; /* Darker blue heading */
   text-align: center;
-  margin-bottom: 2.5rem; /* More space below headings */
+  margin-bottom: 2.8rem; /* More space below headings */
   font-weight: 700;
+  letter-spacing: -0.5px; /* Slight letter spacing adjustment */
+}
+
+/* About Us Section */
+#about-us {
+  background-color: #f3f9ff; /* A soft, light blue background */
+  padding: 6rem 0; /* Generous top and bottom padding */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2.5rem; /* Space below this section */
+}
+
+#about-us::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://via.placeholder.com/1500x800/e0f2fe/e0f2fe?text=+'); /* Subtle background pattern */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15; /* Make it subtle */
+  z-index: 0;
+}
+
+.about-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+#about-us h2 {
+  font-size: 3.2rem; /* Larger heading */
+  color: #0a3d62;
+  margin-bottom: 2.5rem;
+}
+
+.intro-paragraph {
+  font-size: 1.3rem; /* Slightly larger paragraph */
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 3.5rem;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mission-vision-values {
+  display: flex;
+  justify-content: center;
+  gap: 3rem; /* More space between the three items */
+  margin-top: 3.5rem;
+  flex-wrap: nowrap; /* Ensures items stay in one row */
+}
+
+.mission-vision-values .item {
+  flex: 1;
+  min-width: 300px;
+  max-width: 360px;
+  background-color: white;
+  padding: 3rem; /* More padding */
+  border-radius: 20px; /* More rounded */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Stronger shadow */
+  text-align: left;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.mission-vision-values .item:hover {
+  transform: translateY(-10px); /* More pronounced lift effect on hover */
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+}
+
+.mission-vision-values .item .icon-about {
+  font-size: 3.5rem; /* Larger icons */
+  color: #054A91;
+  margin-bottom: 1.8rem;
+  display: block;
+  text-align: center;
+}
+
+.mission-vision-values .item h3 {
+  font-size: 2.1rem; /* Larger sub-headings */
+  color: #0a3d62;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.mission-vision-values .item p,
+.mission-vision-values .item ul {
+  font-size: 1.05rem; /* Slightly larger text */
+  line-height: 1.7;
+  color: #666;
+}
+
+.mission-vision-values .item ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.2rem;
+}
+
+.mission-vision-values .item ul li {
+  margin-bottom: 0.6rem;
+  position: relative;
+  padding-left: 1.5em; /* Space for custom bullet */
+}
+
+.mission-vision-values .item ul li::before {
+  content: '✔'; /* Custom checkmark bullet */
+  color: #054A91;
+  font-weight: bold;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: inherit; /* Align with text */
 }
 
 /* New: Impact Statistics Section */
 .stats-section {
-  background-color: #e6f0ff; /* Light blue background for impact stats */
+  background-color: #eaf6ff; /* Lighter blue background for impact stats */
   text-align: center;
-  padding: 4rem 2rem; /* More padding for a prominent section */
+  padding: 4.5rem 2rem; /* More padding for a prominent section */
+  margin-bottom: 2.5rem;
 }
 
 .stats-grid {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 2rem; /* Space between stat boxes */
-  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 2.5rem; /* More space between stat boxes */
+  margin-top: 2.5rem;
 }
 
 .stat-box {
   background-color: white;
-  border-radius: 15px;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 20px; /* More rounded */
+  padding: 2rem 2.5rem; /* More padding */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12); /* Stronger shadow */
   text-align: center;
-  flex: 1; /* Allow boxes to grow/shrink */
-  min-width: 250px; /* Minimum width before wrapping */
-  max-width: 300px; /* Max width for consistency */
+  flex: 1;
+  min-width: 260px;
+  max-width: 310px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-box:hover {
-  transform: translateY(-5px); /* Lift effect on hover */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: translateY(-8px); /* More pronounced lift effect on hover */
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18); /* Stronger shadow on hover */
 }
 
 .stat-number {
-  font-size: 3.5rem; /* Large, prominent numbers */
+  font-size: 4rem; /* Larger, prominent numbers */
   font-weight: bold;
-  color: #054A91; /* Main brand color */
-  display: block; /* Ensure it takes full width */
-  margin-bottom: 0.5rem;
+  color: #054A91;
+  display: block;
+  margin-bottom: 0.8rem;
 }
 
 .stat-label {
-  font-size: 1.2rem;
+  font-size: 1.3rem; /* Larger label text */
   color: #555;
   font-weight: 500;
 }
@@ -229,88 +356,93 @@ section h2 {
 
 /* Map Section */
 #map-section {
-  background: #e6f0ff; /* Light blue background */
+  background: #eaf6ff; /* Consistent light blue background */
   text-align: center;
+  margin-bottom: 2.5rem;
 }
 
 #mapid {
   width: 100%;
-  height: 550px; /* Increased map height */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  height: 550px;
+  border-radius: 18px; /* Consistent rounded corners */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* Consistent shadow */
 }
 
 /* Donate Section */
 #donate-section {
   background: #fff;
   text-align: center;
+  margin-bottom: 2.5rem;
 }
 
 .donate-options {
   display: flex;
   justify-content: center;
-  gap: 3rem; /* More space between options */
+  gap: 3.5rem; /* More space between options */
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .option-box {
-  background: #f0f8ff;
-  border-radius: 18px; /* More rounded */
-  padding: 2rem;
-  width: 30%; /* Adjust width for 3 columns */
-  min-width: 280px; /* Minimum width before stacking */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  background: #f8fcfd; /* Very light background for boxes */
+  border-radius: 20px;
+  padding: 2.5rem; /* More padding */
+  width: 30%;
+  min-width: 290px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* Improved shadow */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .option-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 .option-box h3 {
   color: #0a3d62;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 2rem; /* Larger heading */
 }
 
 .option-box p {
   color: #666;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
+  font-size: 1.05rem;
 }
 
 .option-box .button.small {
-  padding: 0.7rem 1.5rem;
-  font-size: 0.9rem;
-  border-radius: 20px;
+  padding: 0.8rem 1.8rem; /* Slightly larger small button */
+  font-size: 0.95rem;
+  border-radius: 25px; /* More rounded */
 }
 
 /* Report Section (display:none by default, controlled by JS) */
 #report-section {
     background: #fff;
     text-align: center;
+    margin-bottom: 2.5rem;
 }
 
 .report-container {
-    max-width: 800px;
+    max-width: 850px; /* Slightly wider container */
     margin: 0 auto;
-    padding: 2rem;
-    border-radius: 15px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    text-align: left; /* Align form elements to the left */
+    padding: 2.5rem; /* More padding */
+    border-radius: 20px;
+    background-color: #fdfdfd; /* Lighter background */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* Stronger shadow */
+    text-align: left;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem; /* More space between form groups */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem; /* More space below label */
     font-weight: 600;
     color: #0a3d62;
+    font-size: 1.05rem; /* Slightly larger label font */
 }
 
 .form-group input[type="text"],
@@ -319,21 +451,31 @@ section h2 {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 0.9rem; /* More padding for inputs */
+    border: 1px solid #e0e0e0; /* Lighter border */
+    border-radius: 10px; /* More rounded inputs */
     font-size: 1rem;
-    box-sizing: border-box; /* Ensures padding doesn't affect total width */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on focus */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #054A91; /* Highlight on focus */
+    box-shadow: 0 0 0 3px rgba(5, 74, 145, 0.2); /* Soft blue glow */
+    outline: none; /* Remove default outline */
 }
 
 .form-group textarea {
-    resize: vertical; /* Allow vertical resizing */
+    resize: vertical;
 }
 
 #report-map {
-    border-radius: 8px;
-    margin-top: 1rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    margin-top: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 #selected-coords {
@@ -342,110 +484,115 @@ section h2 {
 }
 
 .report-container .button {
-    width: auto; /* Adjust button width */
-    padding: 0.8rem 2.5rem;
-    margin-top: 1.5rem;
-    font-size: 1.1rem;
+    width: auto;
+    padding: 0.9rem 2.8rem; /* Larger button */
+    margin-top: 2rem; /* More space above button */
+    font-size: 1.2rem; /* Larger font */
     cursor: pointer;
     border: none;
-    border-radius: 30px;
+    border-radius: 35px; /* More rounded */
     background-color: #054A91;
     color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .report-container .button:hover {
     background-color: #003f7f;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
 .message-box {
-    padding: 1rem;
-    margin-top: 1.5rem;
-    border-radius: 8px;
+    padding: 1.2rem; /* More padding */
+    margin-top: 1.8rem;
+    border-radius: 10px;
     font-weight: bold;
     text-align: center;
-    display: none; /* Hidden by default */
+    display: none;
+    font-size: 1.05rem;
 }
 
 .message-box.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background-color: #e6ffe6; /* Lighter green */
+    color: #1a7337; /* Darker green text */
+    border: 1px solid #a3e6a3;
 }
 
 .message-box.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: #ffe6e6; /* Lighter red */
+    color: #cc0000; /* Darker red text */
+    border: 1px solid #e6a3a3;
 }
 
 
 /* Partners */
 .partners {
-  background: #f9f9f9; /* Lighter background for partners */
+  background: #fdfdfd; /* Lighter background for partners */
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 3.5rem 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .partner-logos {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 3rem; /* More space between logos */
-  margin-top: 2rem;
+  gap: 3.5rem; /* More space between logos */
+  margin-top: 2.5rem;
 }
 
 .partner-logos img {
-  max-width: 150px; /* Larger logos */
+  max-width: 160px; /* Slightly larger logos */
   height: auto;
-  filter: grayscale(80%); /* Subtle grayscale */
-  opacity: 0.7;
-  transition: filter 0.3s ease, opacity 0.3s ease;
+  filter: grayscale(85%); /* Slightly more grayscale */
+  opacity: 0.75; /* Slightly more opaque */
+  transition: filter 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
 }
 
 .partner-logos img:hover {
   filter: grayscale(0%);
   opacity: 1;
+  transform: translateY(-5px); /* Lift effect on hover */
 }
 
 /* Testimonials */
 .testimonials {
-  padding: 4rem 2rem; /* More padding */
-  background: #e6f0ff; /* Light blue background */
+  padding: 4.5rem 2rem;
+  background: #eaf6ff; /* Consistent light blue background */
   text-align: center;
-  margin-bottom: 2rem; /* Space before footer */
+  margin-bottom: 2.5rem;
 }
 
 .testimonial-box {
   background: white;
-  border-radius: 15px;
-  padding: 2.5rem; /* More padding */
-  margin: 0 auto 2.5rem auto; /* Center and space out boxes */
-  max-width: 800px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-radius: 20px; /* More rounded */
+  padding: 3rem; /* More padding */
+  margin: 0 auto 3rem auto; /* Center and space out boxes */
+  max-width: 850px; /* Slightly wider */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12); /* Stronger shadow */
   font-style: italic;
   line-height: 1.8;
   color: #444;
 }
 
 .testimonial-box p {
-  font-size: 1.25rem; /* Larger testimonial text */
-  margin-bottom: 1.5rem;
+  font-size: 1.3rem; /* Larger testimonial text */
+  margin-bottom: 1.8rem;
 }
 
 .testimonial-box strong {
   display: block;
-  font-size: 1rem;
+  font-size: 1.1rem; /* Slightly larger name */
   color: #0a3d62;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 }
 
 /* Footer */
 footer {
   background: #054A91;
   color: white;
-  padding: 1.5rem 2rem; /* More padding */
+  padding: 1.8rem 2rem; /* More padding */
   text-align: center;
 }
 
@@ -455,28 +602,28 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
+  flex-wrap: wrap;
 }
 
 .footer-content p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem; /* Slightly larger font */
 }
 
 .socials {
-  margin-top: 0.5rem; /* Space between text and icons on wrap */
+  margin-top: 0.8rem; /* More space between text and icons on wrap */
 }
 
 .socials i {
-  font-size: 1.5rem;
-  margin: 0 0.75rem; /* More space between icons */
+  font-size: 1.6rem; /* Larger icons */
+  margin: 0 0.8rem; /* More space between icons */
   color: white;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .socials i:hover {
   color: #aacde8;
-  transform: translateY(-2px);
+  transform: translateY(-3px); /* More pronounced lift */
 }
 
 
@@ -511,7 +658,7 @@ footer {
   }
 
   .carousel {
-      height: 400px; /* Adjust height for smaller screens */
+      height: 400px;
   }
 
   section {
@@ -520,9 +667,35 @@ footer {
   }
 
   section h2 {
-      font-size: 2rem;
+      font-size: 2.2rem; /* Adjusted for smaller screens */
       margin-bottom: 2rem;
   }
+
+  /* Responsive adjustments for About Us */
+  #about-us {
+    padding: 3rem 0;
+  }
+  #about-us h2 {
+    font-size: 2.5rem; /* Adjusted for smaller screens */
+  }
+  .intro-paragraph {
+    font-size: 1.15rem; /* Adjusted for smaller screens */
+    margin-bottom: 2.5rem;
+  }
+  .mission-vision-values .item {
+    padding: 2.2rem;
+    min-width: 90%;
+    max-width: 400px;
+    margin-bottom: 1.8rem;
+  }
+  .mission-vision-values .item .icon-about {
+    font-size: 2.8rem; /* Adjusted for smaller screens */
+    margin-bottom: 1.2rem;
+  }
+  .mission-vision-values .item h3 {
+    font-size: 1.8rem; /* Adjusted for smaller screens */
+  }
+
 
   .stats-grid {
       flex-direction: column;
@@ -530,7 +703,7 @@ footer {
   }
 
   .stat-box {
-      width: 90%; /* Adjust width for mobile */
+      width: 90%;
       max-width: 350px;
   }
 
@@ -541,16 +714,16 @@ footer {
   }
 
   .option-box, .partner-logos img {
-    width: 90%; /* Adjust width for mobile */
+    width: 90%;
     max-width: 350px;
   }
 
   .report-container {
-      padding: 1.5rem;
+      padding: 1.8rem;
   }
 
   .footer-content {
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.2rem;
   }
 }
