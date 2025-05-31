@@ -19,12 +19,12 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Optional: Enable offline persistence (useful for Firestore, but not strictly needed for basic setup)
-// firebase.firestore().enablePersistence()
-//   .catch((err) => {
-//       if (err.code == 'failed-precondition') {
-//           console.warn('Firestore persistence failed due to multiple tabs.');
-//       } else if (err.code == 'unimplemented') {
-//           console.warn('Firestore persistence not supported in this browser.');
-//       }
-//   });
+// Enable offline persistence for better user experience
+firebase.firestore().enablePersistence()
+  .catch((err) => {
+      if (err.code === 'failed-precondition') {
+          console.warn('Firestore persistence failed due to multiple tabs.');
+      } else if (err.code === 'unimplemented') {
+          console.warn('Firestore persistence not supported in this browser.');
+      }
+  });

@@ -58,47 +58,61 @@ function displayMessage(message, isError = false) {
     }
 }
 
-// --- AUTH STATE LISTENER ---
-firebase.auth().onAuthStateChanged((user) => {
+// Function to update UI based on authentication state
+async function updateUIForAuthState(user) {
+    currentUser = user;
     if (user) {
-        // User is signed in.
-        currentUser = user;
-        console.log('User is signed in:', currentUser.email);
+        try {
+            // Verify token with backend
+            const token = await user.getIdToken();
+            const response = await fetch(`${API_URL}/auth/verify-token`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to verify token with backend');
+            }
 
-        // Update navbar for logged in user: Hide Login/Signup, Show Logout and Report
-        if (loginLi) loginLi.style.display = 'none';
-        if (signupLi) signupLi.style.display = 'none';
-        if (logoutLi) logoutLi.style.display = 'block';
-        if (reportLi) reportLi.style.display = 'block'; // Show Report link
-
-        // Ensure a default section is shown when logged in (e.g., home or report)
-        const currentHash = window.location.hash.substring(1); // Get hash without '#'
-        if (!currentHash || !document.getElementById(currentHash) || !document.getElementById(currentHash).classList.contains('main-content-section')) {
-             showSection('home-section'); // Default to home if no valid hash is present or not a main section
-        } else {
-            showSection(currentHash); // Show section based on hash if it exists and is a main section
+            // Show authenticated nav items
+            loginLi.style.display = 'none';
+            signupLi.style.display = 'none';
+            logoutLi.style.display = 'block';
+            reportLi.style.display = 'block';
+            
+            // Update user profile if available
+            await updateUserProfile();
+        } catch (error) {
+            console.error('Error verifying token:', error);
+            await firebase.auth().signOut();
         }
-
     } else {
-        // User is signed out.
-        currentUser = null;
-        console.log('User is signed out.');
-
-        // Update navbar for logged out user: Show Login/Signup, Hide Logout and Report
-        if (loginLi) loginLi.style.display = 'block';
-        if (signupLi) signupLi.style.display = 'block';
-        if (logoutLi) logoutLi.style.display = 'none';
-        if (reportLi) reportLi.style.display = 'none'; // Hide Report link
-
-        // If on index.html and logged out, always show the home section
-        const currentPage = window.location.pathname;
-        if (currentPage.endsWith('index.html')) {
-            showSection('home-section'); // Always show home section on index.html if logged out
-        }
-        // If on login.html or signup.html, they remain visible as they are not "sections" managed by showSection
+        // Show non-authenticated nav items
+        loginLi.style.display = 'block';
+        signupLi.style.display = 'block';
+        logoutLi.style.display = 'none';
+        reportLi.style.display = 'none';
     }
-});
+}
 
+// Function to update user profile
+async function updateUserProfile() {
+    try {
+        const profileData = await callApi('/auth/profile');
+        // Update UI with profile data if needed
+        console.log('Profile loaded:', profileData);
+    } catch (error) {
+        console.error('Error loading profile:', error);
+    }
+}
+
+// Event listener for authentication state changes
+firebase.auth().onAuthStateChanged(async (user) => {
+    await updateUIForAuthState(user);
+});
 
 // --- EVENT LISTENERS FOR NAVBAR LINKS ---
 if (homeLink) {
@@ -155,45 +169,54 @@ window.handleReportButtonClick = function() {
     }
 };
 
-
 // --- LOGIN FORM SUBMISSION ---
 if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = loginForm['email'].value;
         const password = loginForm['password'].value;
 
-        auth.signInWithEmailAndPassword(email, password)
-            .then((cred) => {
-                console.log('User logged in:', cred.user);
-                // Redirect to index.html after successful login
-                window.location.href = './index.html#home-section'; // Redirect to home section
-            })
-            .catch((error) => {
-                console.error('Login error:', error.message);
-                alert(error.message); // Display Firebase error message
-            });
+        try {
+            // Sign in with Firebase
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            const user = userCredential.user;
+            
+            // Get user profile from backend
+            const profile = await userApi.getProfile();
+            console.log('Logged in successfully:', profile);
+            
+            window.location.href = 'index.html';
+        } catch (error) {
+            console.error('Login error:', error);
+            alert(error.message);
+        }
     });
 }
 
 // --- SIGNUP FORM SUBMISSION ---
 if (signupForm) {
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const name = signupForm['name'].value; // You might want to store this in Firestore later
         const email = signupForm['email'].value;
         const password = signupForm['password'].value;
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .then((cred) => {
-                console.log('User signed up:', cred.user);
-                // After successful signup, redirect to login or directly to home
-                window.location.href = './index.html#home-section'; // Redirect to home section
-            })
-            .catch((error) => {
-                console.error('Signup error:', error.message);
-                alert(error.message); // Display Firebase error message
+        try {
+            // Create user in Firebase
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            const user = userCredential.user;
+            
+            // Update profile in backend
+            await userApi.updateProfile({
+                email: email,
+                displayName: signupForm.name.value
             });
+            
+            window.location.href = 'index.html';
+        } catch (error) {
+            console.error('Signup error:', error);
+            alert(error.message);
+        }
     });
 }
 

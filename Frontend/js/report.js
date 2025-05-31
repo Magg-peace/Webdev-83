@@ -1,12 +1,21 @@
 // js/report.js
 
-// Ensure firebase-init.js has been loaded and `auth`, `db`, and `storage` are globally accessible.
-// Also ensure the displayMessage function from auth.js is available or re-declared here if this script runs independently.
+// Ensure firebase-init.js has been loaded and API functions are available from api.js
+// Also ensure the displayMessage function from auth.js is available
 
 let reportMap = null;
 let marker = null;
 let selectedLat = null;
 let selectedLng = null;
+
+// Cache DOM elements
+const reportForm = document.getElementById('report-form');
+const disasterTypeSelect = document.getElementById('disaster-type');
+const severitySelect = document.getElementById('severity');
+const descriptionInput = document.getElementById('description');
+const locationInput = document.getElementById('location');
+const imagesInput = document.getElementById('images');
+const selectedCoordsSpan = document.getElementById('selected-coords');
 
 // Re-declare displayMessage if report.js might load before auth.js,
 // or ensure auth.js loads first and exposes it globally.
@@ -127,86 +136,140 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle form submission
-    if (disasterReportForm) {
-        disasterReportForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default form submission (page reload)
+    reportForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            // Validate that a location has been selected on the map
-            if (selectedLat === null || selectedLng === null) {
-                displayMessage("Please select a disaster location on the map.", true);
-                return;
+        if (!selectedLat || !selectedLng) {
+            displayMessage('Please select a location on the map', true);
+            return;
+        }
+
+        try {
+            // Prepare the report data
+            const reportData = {
+                type: disasterTypeSelect.value,
+                severity: severitySelect.value,
+                description: descriptionInput.value,
+                location: locationInput.value,
+                coordinates: {
+                    latitude: selectedLat,
+                    longitude: selectedLng
+                },
+                timestamp: new Date().toISOString()
+            };
+
+            // Submit the report first
+            const response = await disasterApi.createDisaster(reportData);
+
+            // Handle image uploads if any
+            if (imagesInput.files.length > 0) {
+                const imageUrls = await uploadImagesToFirebase(imagesInput.files, response.id);
+                await disasterApi.updateDisaster(response.id, {
+                    imageUrls: imageUrls
+                });
             }
 
-            const disasterType = disasterTypeInput.value;
-            const locationDescription = locationDescriptionInput.value;
-            const urgencyLevel = urgencyLevelInput.value;
-            const needs = needsInput.value;
-            const reporterName = reporterNameInput.value;
-            const reporterContact = reporterContactInput.value;
-            const imageFile = imageUploadInput.files[0]; // Get the selected image file
-            const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : 'anonymous'; // Get current user ID
+            displayMessage('Report submitted successfully!', false);
+            resetForm();
+            
+            // Redirect to map view after successful submission
+            setTimeout(() => {
+                window.location.href = 'index.html#map-section';
+            }, 2000);
 
-            let imageUrl = null; // To store the URL of the uploaded image
+        } catch (error) {
+            console.error('Error submitting report:', error);
+            displayMessage('Failed to submit report: ' + error.message, true);
+        }
+    });
 
-            // Show loading message
-            displayMessage("Submitting report and uploading image...", false);
+    // Upload images to Firebase Storage
+    async function uploadImagesToFirebase(files, disasterId) {
+        const imageUrls = [];
+        const storageRef = firebase.storage().ref();
+
+        for (const file of files) {
+            const timestamp = Date.now();
+            const fileName = `${timestamp}-${file.name}`;
+            const fileRef = storageRef.child(`disasters/${disasterId}/${fileName}`);
+            
+            try {
+                await fileRef.put(file);
+                const downloadUrl = await fileRef.getDownloadURL();
+                imageUrls.push(downloadUrl);
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                // Continue with other images even if one fails
+            }
+        }
+
+        return imageUrls;
+    }
+
+    // Reset form fields
+    function resetForm() {
+        reportForm.reset();
+        if (marker) {
+            reportMap.removeLayer(marker);
+            marker = null;
+        }
+        selectedLat = null;
+        selectedLng = null;
+        selectedCoordsSpan.textContent = 'No location selected';
+    }
+
+    // Get form elements
+    const reportForm = document.getElementById('report-form');
+    const disasterTypeSelect = document.getElementById('disaster-type');
+    const locationInput = document.getElementById('location');
+    const descriptionInput = document.getElementById('description');
+    const severitySelect = document.getElementById('severity');
+
+    // Function to load existing disasters
+    async function loadDisasters() {
+        try {
+            const disasters = await disasterApi.getAllDisasters();
+            const select = document.getElementById('disaster-type');
+            select.innerHTML = '<option value="">Select a disaster</option>';
+
+            disasters.forEach(disaster => {
+                const option = document.createElement('option');
+                option.value = disaster.id;
+                option.textContent = `${disaster.type} - ${disaster.location}`;
+                select.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error loading disasters:', error);
+            alert('Failed to load disasters. Please try again.');
+        }
+    }
+
+    // Load disasters when the page loads
+    document.addEventListener('DOMContentLoaded', loadDisasters);
+
+    // Handle report form submission
+    if (reportForm) {
+        reportForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const reportData = {
+                disasterId: disasterTypeSelect.value,
+                location: locationInput.value,
+                description: descriptionInput.value,
+                severity: severitySelect.value,
+                status: 'new'
+            };
 
             try {
-                // 1. Upload image to Firebase Storage if a file is selected
-                if (imageFile) {
-                    // Create a storage reference
-                    // Using a timestamp and user ID to ensure unique file names
-                    const storageRef = storage.ref(`disaster_images/${userId}/${Date.now()}_${imageFile.name}`);
-                    const uploadTask = storageRef.put(imageFile);
+                const newReport = await reportApi.createReport(reportData);
+                alert('Report submitted successfully!');
+                reportForm.reset();
 
-                    // Await the upload completion and get the download URL
-                    await uploadTask;
-                    imageUrl = await storageRef.getDownloadURL();
-                    console.log("Image uploaded:", imageUrl);
-                }
-
-                // 2. Store report details (including image URL if available) in Firestore
-                // Data will be stored in /artifacts/{appId}/public/data/disasterReports
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const collectionPath = `artifacts/${appId}/public/data/disasterReports`;
-
-                await firebase.firestore().collection(collectionPath).add({
-                    userId: userId,
-                    disasterType: disasterType,
-                    locationDescription: locationDescription,
-                    urgencyLevel: urgencyLevel,
-                    needs: needs,
-                    reporterName: reporterName,
-                    reporterContact: reporterContact,
-                    latitude: selectedLat,
-                    longitude: selectedLng,
-                    imageUrl: imageUrl, // Store the uploaded image URL
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp() // Use Firestore server timestamp
-                });
-
-                displayMessage("Disaster report submitted successfully! NGOs and rescue teams in the vicinity have been notified (simulated).");
-                disasterReportForm.reset(); // Clear the form fields
-                // Reset map marker and coordinates display
-                if (marker) {
-                    reportMap.removeLayer(marker);
-                    marker = null;
-                }
-                selectedLat = null;
-                selectedLng = null;
-                latitudeInput.value = '';
-                longitudeInput.value = '';
-                selectedCoordsSpan.textContent = 'N/A';
-                // Hide image preview
-                imagePreview.src = '#';
-                imagePreview.style.display = 'none';
-
-                // Simulate sending notifications to NGOs/rescue teams
-                console.log(`SIMULATED: Notification sent for a ${disasterType} at ${locationDescription} (${selectedLat}, ${selectedLng}).`);
-                console.log("In a real application, a backend service would now send emails/SMS to nearby NGOs/rescue centers.");
-
+                // Redirect to the reports list or refresh the current page
+                window.location.href = 'index.html#reports';
             } catch (error) {
-                console.error("Error submitting disaster report or uploading image:", error);
-                displayMessage(`Error submitting report: ${error.message}`, true);
+                console.error('Error submitting report:', error);
+                alert('Failed to submit report. Please try again.');
             }
         });
     }
@@ -218,3 +281,91 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof initLiveMap === 'function') {
     window.initLiveMap = initLiveMap;
 }
+
+// Function to submit disaster report
+async function submitDisasterReport(reportData) {
+    try {
+        const response = await disasterApi.createDisaster(reportData);
+        
+        if (response.id) {
+            // Upload images if any were selected
+            const imageFiles = document.getElementById('images').files;
+            if (imageFiles.length > 0) {
+                const imageUrls = await uploadImages(imageFiles, response.id);
+                
+                // Update disaster report with image URLs
+                await disasterApi.updateDisaster(response.id, {
+                    imageUrls: imageUrls
+                });
+            }
+            
+            displayMessage('Disaster report submitted successfully!', false);
+            resetForm();
+            return true;
+        }
+    } catch (error) {
+        console.error('Error submitting report:', error);
+        displayMessage('Failed to submit report: ' + error.message, true);
+        return false;
+    }
+}
+
+// Helper function to upload images
+async function uploadImages(files, disasterId) {
+    const imageUrls = [];
+    const storageRef = firebase.storage().ref();
+
+    for (let file of files) {
+        try {
+            const fileRef = storageRef.child(`disaster-images/${disasterId}/${file.name}`);
+            await fileRef.put(file);
+            const url = await fileRef.getDownloadURL();
+            imageUrls.push(url);
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            // Continue with other images even if one fails
+        }
+    }
+
+    return imageUrls;
+}
+
+// Function to reset the form
+function resetForm() {
+    document.getElementById('report-form').reset();
+    if (marker) {
+        reportMap.removeLayer(marker);
+        marker = null;
+    }
+    selectedLat = null;
+    selectedLng = null;
+    document.getElementById('selected-coords').textContent = 'No location selected';
+}
+
+// Event listener for form submission
+document.getElementById('report-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!selectedLat || !selectedLng) {
+        displayMessage('Please select a location on the map', true);
+        return;
+    }
+
+    const formData = {
+        type: document.getElementById('disaster-type').value,
+        severity: document.getElementById('severity').value,
+        description: document.getElementById('description').value,
+        latitude: selectedLat,
+        longitude: selectedLng,
+        location: document.getElementById('location').value,
+        timestamp: new Date().toISOString()
+    };
+
+    const success = await submitDisasterReport(formData);
+    if (success) {
+        // Optionally redirect to the map view after successful submission
+        setTimeout(() => {
+            window.location.href = 'index.html#map-section';
+        }, 2000);
+    }
+});
