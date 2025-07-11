@@ -1,0 +1,16 @@
+{
+  "name": "relieflink-backend",
+  "version": "1.0.0",
+  "description": "Backend for ReliefLink project using Express and Firebase",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.21.2",
+    "firebase-admin": "^11.5.0",
+    "nodemailer": "^7.0.5"
+  }
+}

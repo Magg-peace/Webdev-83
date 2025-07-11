@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | ReliefLink</title>
+  <link rel="stylesheet" href="./signup.css" /> </head>
+<body>
+  <div class="signup-container">
+    <div class="form-section">
+      <h2>Sign up</h2>
+      <p>Already have an account? <a href="./login.html">Login here</a></p>
+      <form id="signup-form"> <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+
+        <label>
+          <input type="checkbox" required>
+          I agree to receive updates and emergency alerts.
+        </label>
+
+        <button type="submit" class="submit-btn">Sign Up</button>
+      </form>
+    </div>
+    <div class="image-section">
+      <img src="./images/hero-bg.jpg" alt="Signup Illustration">
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="./js/firebase-init.js"></script>
+  <script src="./js/auth.js"></script>
+  </body>
+</html>
