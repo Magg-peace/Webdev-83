@@ -1,0 +1,127 @@
+/* login.css */
+/* Reset some basics */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+  /* Removed global background-color and color from here as body handles it */
+}
+
+body {
+  background-color: #054A91; /* Consistent background for login/signup pages */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Use min-height to allow content to push height */
+  color: #333; /* Default text color */
+}
+
+.login-container {
+  background-color: #e6f0ff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  display: flex;
+  width: 80%;
+  max-width: 1000px;
+  overflow: hidden;
+}
+
+.form-section {
+  flex: 1;
+  padding: 40px;
+  background-color: #fff; /* Ensure form background is white */
+}
+
+.form-section h2 {
+  margin-bottom: 2rem;
+  color: #0a3d62;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.form-section p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-section p a {
+  color: #0a3d62;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-section p a:hover {
+  text-decoration: underline;
+}
+
+.form-section label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #0a3d62;
+}
+
+.form-section input[type="email"],
+.form-section input[type="password"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.8rem;
+  border: 1.8px solid #aacde8;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-section input[type="email"]:focus,
+.form-section input[type="password"]:focus {
+  border-color: #0a3d62;
+  outline: none;
+}
+
+.form-section button {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background-color: #054A91;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.form-section button:hover {
+  background-color: #003f7f;
+}
+
+.image-section {
+  flex: 1;
+  background-color: #e6f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px; /* Added for softer image edges */
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    margin: 20px;
+  }
+
+  .image-section {
+    display: none; /* Hide image on smaller screens */
+  }
+}

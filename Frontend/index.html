@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReliefLink - Disaster Management Platform</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="logo">ReliefLink</div>
+      <nav>
+        <ul>
+          <li><a href="#home-section" id="home-link">Home</a></li>
+          <li><a href="#map-section" id="live-map-link">Live Map</a></li>
+          <li><a href="#donate-section" id="donate-link">Donate</a></li>
+          <li class="report-li" style="display: none;"><a href="#" id="report-link">Report</a></li>
+          <li class="login-li"><a href="./login.html">Login</a></li>
+          <li class="signup-li"><a href="./signup.html">Sign Up</a></li>
+          <li class="logout-li" style="display: none;"><a href="#" id="logout-link">Logout</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home-section" class="carousel">
+      <div class="slide fade">
+        <img src="./images/disaster1.jpg" alt="Slide 1">
+        <div class="hero-content">
+          <h1>Welcome to ReliefLink</h1>
+          <p>Connecting aid with those in need during disasters.</p>
+          <a href="#" class="button" onclick="handleReportButtonClick()">Report a Disaster</a>
+          <a href="#donate-section" class="button secondary">Donate Now</a>
+        </div>
+      </div>
+      <div class="slide fade">
+        <img src="./images/disaster2.jpeg" alt="Slide 2">
+        <div class="hero-content">
+          <h1>Real-time Disaster Monitoring</h1>
+          <p>Stay informed with our live map and real-time updates.</p>
+          <a href="#map-section" class="button">View Live Map</a>
+        </div>
+      </div>
+      <div class="slide fade">
+        <img src="./images/disaster3.jpg" alt="Slide 3">
+        <div class="hero-content">
+          <h1>Support Affected Communities</h1>
+          <p>Your contribution makes a difference in disaster relief.</p>
+          <a href="#donate-section" class="button">Support Us</a>
+        </div>
+      </div>
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </section>
+
+    <section id="about-us">
+      <div class="about-content">
+        <h2>About ReliefLink</h2>
+        <p class="intro-paragraph">ReliefLink is dedicated to connecting communities in crisis with the resources they need, quickly and efficiently. Our platform empowers individuals to report incidents and enables organizations to streamline aid distribution, fostering a global network of support.</p>
+
+        <div class="mission-vision-values">
+          <div class="item">
+            <i class="fas fa-bullseye icon-about"></i>
+            <h3>Our Mission</h3>
+            <p>Our mission is to empower individuals to instantly report disaster events, ensuring that critical information reaches the nearest humanitarian organizations and rescue teams without delay. We strive to accelerate aid delivery, minimize harm, and build more resilient communities by connecting those in need with those who can help, quickly and efficiently.</p>
+          </div>
+          <div class="item">
+            <i class="fas fa-lightbulb icon-about"></i>
+            <h3>Our Vision</h3>
+            <p>We envision a future where no life or livelihood is lost due to a lack of timely information during a disaster. Our platform will be the global standard for citizen-led disaster reporting, transforming how communities and humanitarian aid organizations connect, enabling rapid, informed decisions, and fostering a world where resilience is built from the ground up, one report at a time.</p>
+          </div>
+          <div class="item">
+            <i class="fas fa-handshake icon-about"></i>
+            <h3>Our Values</h3>
+            <ul>
+                <li><strong>Compassion:</strong> Driven by empathy for those in distress.</li>
+                <li><strong>Transparency:</strong> Ensuring all actions and aid flows are clear.</li>
+                <li><strong>Efficiency:</strong> Delivering help with speed and precision.</li>
+                <li><strong>Collaboration:</strong> Fostering strong partnerships for greater impact.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact-stats" class="stats-section">
+        <h2>Our Impact</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-number">1,200+</span>
+                <p class="stat-label">Disasters Reported</p>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">50,000+</span>
+                <p class="stat-label">People Reached</p>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">150+</span>
+                <p class="stat-label">Active NGOs</p>
+            </div>
+        </div>
+    </section>
+    <section id="map-section" class="main-content-section" style="display: block !important;">
+ <h2>Live Disaster Map</h2>
+      <div id="mapid" style="height: 500px;"></div>
+    </section>
+
+    <section id="donate-section" class="main-content-section">
+      <h2>Support Relief Efforts</h2>
+      <p>Your contribution can make a significant difference in saving lives and rebuilding communities.</p>
+      <div class="donate-options">
+        <div class="option-box">
+          <h3>Emergency Fund</h3>
+          <p>Provide immediate relief to affected families.</p>
+          <a href="#" class="button small">Donate Now</a>
+        </div>
+        <div class="option-box">
+          <h3>Rehabilitation Projects</h3>
+          <p>Support long-term recovery and rebuilding efforts.</p>
+          <a href="#" class="button small">Donate Now</a>
+        </div>
+        <div class="option-box">
+          <h3>Volunteer Support</h3>
+          <p>Help us equip and train our dedicated volunteers.</p>
+          <a href="#" class="button small">Donate Now</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="report-section" style="display:none;" class="main-content-section">
+      <h2>Report a Disaster</h2>
+      <p>Please provide details about the disaster you are reporting. This information helps us coordinate relief efforts effectively.</p>
+      <div class="report-container">
+        <form id="disaster-report-form">
+          <div class="form-group">
+            <label for="disaster-type">Disaster Type:</label>
+            <select id="disaster-type" name="disaster-type" required>
+              <option value="">Select Type</option>
+              <option value="Flood">Flood</option>
+              <option value="Earthquake">Earthquake</option>
+              <option value="Wildfire">Wildfire</option>
+              <option value="Cyclone">Cyclone</option>
+              <option value="Landslide">Landslide</option>
+              <option value="Drought">Drought</option>
+              <option value="Tsunami">Tsunami</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="location-description">Location Description:</label>
+            <input type="text" id="location-description" placeholder="e.g., Street name, Landmark, Village name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="report-map">Click on the map to pinpoint location:</label>
+            <div id="report-map" style="height: 500px; width: 100%;"></div>
+            <p>Selected Coordinates: <span id="selected-coords">N/A</span></p>
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+          </div>
+
+          <div class="form-group">
+            <label for="severity">Severity:</label>
+            <select id="severity" name="severity" required>
+              <option value="">Select Severity</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="needs">Immediate Needs:</label>
+            <textarea id="needs" name="needs" rows="4" placeholder="e.g., Food, Water, Medical Supplies, Shelter, Rescue" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="reporter-contact">Your Contact (Optional):</label>
+            <input type="text" id="reporter-contact" placeholder="Phone or Email">
+          </div>
+
+          <div class="form-group">
+            <label for="disaster-image">Upload Image (Optional):</label>
+            <input type="file" id="disaster-image" accept="image/*">
+            <img id="image-preview" src="#" alt="Image Preview" style="display:none; max-width: 200px; margin-top: 10px;">
+          </div>
+
+          <button type="submit" class="button">Submit Report</button>
+        </form>
+        <div id="message-box" class="message-box" style="display:none;"></div>
+      </div>
+    </section>
+
+    <section class="partners">
+      <h2>Our Valued Partners</h2>
+      <div class="partner-logos">
+        <img src="./images/ngo1.png" alt="Partner 1">
+        <img src="./images/ngo2.png" alt="Partner 2">
+        <img src="./images/ngo3.png" alt="Partner 3">
+        <img src="./images/Construction.png" alt="Partner 4">
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <h2>What People Say About Us</h2>
+      <div class="testimonial-box">
+        <p>"ReliefLink is a lifesaver. The real-time updates helped my family evacuate safely."</p>
+        <strong>- Priya, Resident</strong>
+      </div>
+      <div class="testimonial-box">
+        <p>"Thanks to ReliefLink, our village received food within 24 hours of the flood."</p>
+        <strong>- Asha, Volunteer</strong>
+      </div>
+      <div class="testimonial-box">
+        <p>"The platform helped our NGO reach people faster than ever before."</p>
+        <strong>- Arvind, NGO Head</strong>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 ReliefLink. All rights reserved.</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+<!-- TEST CHANGE -->
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+
+  <script src="./js/firebase-init.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/map.js"></script>
+  <script src="./js/report.js"></script>
+  <script src="./js/carousel.js"></script>
+
+
+  <script>
+  // Test Firestore read access
+  db.collection("test").add({
+    message: "Firebase is working!",
+    timestamp: new Date()
+  }).then(() => {
+    console.log("✅ Firestore write test successful");
+  }).catch((error) => {
+    console.error("❌ Firestore write failed:", error.message);
+  });
+
+  // Test Auth anonymous login (just to test connection)
+  auth.signInAnonymously()
+    .then(() => console.log("✅ Auth test successful"))
+    .catch((err) => console.error("❌ Auth test failed:", err.message));
+</script>
+
+</body>
+</html>

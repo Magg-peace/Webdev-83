@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate | ReliefLink</title>
+  <link rel="stylesheet" href="donate.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <h1 class="logo">ReliefLink</h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="live-map.html">Live Map</a></li>
+          <li><a href="donate.html" class="active">Donate</a></li>
+          <li><a href="report.html">Report</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="donate-section">
+    <div class="container">
+      <h2>Support Relief Efforts</h2>
+      <p>Your donations help us provide essential relief during disasters.</p>
+
+      <form class="donation-form">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="amount">Donation Amount (₹):</label>
+        <input type="number" id="amount" name="amount" required />
+
+        <button type="submit" class="button">Donate Now</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 ReliefLink. All rights reserved.</p>
+  </footer>
+</body>
+</html>
